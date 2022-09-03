@@ -197,9 +197,8 @@
                 }
             })
         }
-        status("https://www.teunjojo.com", "www");
-        status("https://files.teunjojo.com", "files");
-        status("https://status.teunjojo.com", "status");
+        status("http://85.145.76.160/", "www");
+        status("http://85.145.76.160/", "files");
         $.getJSON('https://api.minetools.eu/ping/teunjojo.com/25565', function (data) {
             if (data.error) {
                 $('#mcServer :nth-child(2)').removeClass("neutral");
