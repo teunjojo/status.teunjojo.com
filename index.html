@@ -1,14 +1,213 @@
-<style>
-    @keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
-body {
-    background: #f9edc9
-}
-</style>
-<img style="position:absolute;left:calc(50vw - 24px);top:calc(50vh - 24px);animation:rotation 2s infinite linear;" src="https://www.teunjojo.com/favicons/favicon.ico" onload="window.location='http://www.teunjojo.com';" onerror="window.location='http://status.teunjojo.com';">
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-TileColor" content="#271300">
+    <meta name="theme-color" content="#271300">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+    <title>teunjojo System Status</title>
+    <style media="screen">
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+        :root {
+            --black: #271300;
+            --white: #f9edc9;
+            --text: var(--black);
+            --bg: var(--white);
+            --red: #c0392b;
+            --yellow: #f39c12;
+            --purple: #8e44ad;
+            --green: #27ae60;
+            --darkblue: #2980b9;
+            --lightblue: #3498db;
+            --gray: #555;
+            --brown: #7b3f00;
+
+        }
+
+        html,
+        body {
+            font-family: 'Ubuntu';
+            margin: 0;
+            padding: 0;
+
+            background-color: hsla(0, 0%, 90%, 1);
+            background-image: linear-gradient(-45deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, .05));
+            background-size: 5px;
+        }
+
+        .metal {
+            color: hsl(0, 0%, 50%);
+            text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(74deg, hsl(0, 0%, 60%) 13%, hsl(0, 0%, 80%) 24%, 37%, hsl(0, 0%, 70%) 47%, hsl(0, 0%, 60%) 62%, hsl(0, 0%, 80%) 79%, hsl(0, 0%, 40%) 100%);
+            -webkit-box-sizing: border-box;
+
+            box-sizing: border-box;
+            border: 1px solid #000000;
+            -webkit-box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
+
+        }
+
+        .container {
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 16px;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+            max-width: 100vw;
+        }
+
+        li:first-child {
+            border-top: solid 1px rgba(0, 0, 0, .25);
+
+        }
+
+        li {
+
+            border-bottom: solid 1px rgba(0, 0, 0, .25);
+
+            list-style-type: none;
+            padding: 5px;
+            word-wrap: break-word;
+            margin: 0 12px;
+
+        }
+
+        .online,
+        .offline,
+        .neutral {
+            float: right;
+            width: 12px;
+            height: 12px;
+            margin: 4px;
+            margin-left: 22px;
+            margin-right: 7px;
+            border-radius: 50%;
+            box-shadow:
+                hsla(0, 0%, 0%, .3) 0 -2px 3px 2px,
+                /* outer SD */
+                hsla(0, 0%, 100%, .5) 0 2px 3px 2px;
+            /* outer HL */
+        }
+
+
+        .neutral.online {
+            background-color: #2d8016;
+            box-shadow: inset #000 0 -1px 7px 1px;
+        }
+
+        .neutral.offline {
+
+            background-color: #801700;
+            box-shadow: inset #000 0 -1px 7px 1px;
+        }
+
+        .online {
+            background-color: #9fff2b;
+            box-shadow: inset #3c6e00 0 -1px 9px, #9fff2b 0 2px 12px;
+        }
+
+        .offline {
+            background-color: #f90;
+            box-shadow: inset #400 0 -1px 9px, #f90 0 2px 12px;
+        }
+
+
+        @media screen and (min-width: 459px) {
+            .container {
+
+                width: 459px;
+            }
+        }
+
+
+        .label {
+
+            float: right;
+            margin-left: 10px;
+            padding: 2px 5px;
+            border-radius: calc(16px / 2);
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="30">
+</head>
+
+<body>
+    <div class="metal">
+        <div class="container">
+            <h1>teunjojo System Status</h1>
+            <ul>
+                <li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
+                    <span style="opacity:0">state</span>
+                </li>
+                <li id="www"><span class="online"></span><span class="offline neutral"></span> www.teunjojo.com</li>
+                <li id="files"><span class="online"></span><span class="offline neutral"></span> files.teunjojo.com</li>
+                <li id="status"><span class="online"></span><span class="offline neutral"></span> status.teunjojo.com
+                </li>
+                <li id="mcServer"><span class="online"></span><span class="offline neutral"></span> Minecraft Server
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <script>
+        function isSiteOnline(url, callback) {
+            // try to load favicon
+            var timer = setTimeout(function () {
+                // timeout after 5 seconds
+                callback(false);
+            }, 5000)
+
+            var img = document.createElement("img");
+            img.onload = function () {
+                clearTimeout(timer);
+                callback(true);
+            }
+
+            img.onerror = function () {
+                clearTimeout(timer);
+                callback(false);
+            }
+
+            img.src = url + "/favicon.ico";
+        }
+        function status(ip, id) {
+            isSiteOnline(ip, function (found) {
+                if (!found) {
+                    $('#' + id + ' :nth-child(2)').removeClass("neutral");
+                    $('#' + id + ' :nth-child(1)').addClass("neutral");
+                }
+            })
+        }
+        status("https://www.teunjojo.com", "www");
+        status("https://files.teunjojo.com", "files");
+        status("https://status.teunjojo.com", "status");
+        $.getJSON('https://api.minetools.eu/ping/teunjojo.com/25565', function (data) {
+            if (data.error) {
+                $('#mcServer :nth-child(2)').removeClass("neutral");
+                $('#mcServer :nth-child(1)').addClass("neutral");
+            }
+        });
+
+    </script>
+</body>
+
+</html>
