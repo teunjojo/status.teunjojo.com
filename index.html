@@ -169,6 +169,9 @@
 
     </div>
     <script>
+        isSiteOnline("status.teunjojo.com", function (found) {
+        window.location.href = "status.teunjojo.com";
+        });
         function isSiteOnline(url, callback) {
             // try to load favicon
             var timer = setTimeout(function () {
