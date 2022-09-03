@@ -158,7 +158,8 @@
                 <li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
                     <span style="opacity:0">state</span>
                 </li>
-                <li id="status"><span class="online"></span><span class="offline neutral"></span> status.teunjojo.com</li>
+                <li id="status"><span class="online"></span><span class="offline neutral"></span> status.teunjojo.com
+                </li>
                 <li id="www"><span class="online"></span><span class="offline neutral"></span> www.teunjojo.com</li>
                 <li id="files"><span class="online"></span><span class="offline neutral"></span> files.teunjojo.com</li>
                 <li id="mcServer"><span class="online"></span><span class="offline neutral"></span> Minecraft Server
@@ -168,36 +169,20 @@
 
     </div>
     <script>
-        function isSiteOnline(url, callback) {
-            // try to load favicon
-            var timer = setTimeout(function () {
-                // timeout after 5 seconds
-                callback(false);
-            }, 5000)
-
-            var img = document.createElement("img");
-            img.onload = function () {
-                clearTimeout(timer);
-                callback(true);
-            }
-
-            img.onerror = function () {
-                clearTimeout(timer);
-                callback(false);
-            }
-
-            img.src = url + "/favicon.ico";
-        }
-        function status(ip, id) {
-            isSiteOnline(ip, function (found) {
-                if (!found) {
+        async function status(ip, id) {
+            try {
+                const response = await fetch(ip);
+                if (response.status != 200) {
                     $('#' + id + ' :nth-child(2)').removeClass("neutral");
                     $('#' + id + ' :nth-child(1)').addClass("neutral");
                 }
-            })
+
+            } catch (err) {
+                console.log(err);
+            }
         }
-        status("http://teunjojo.com", "www");
-        status("http://teunjojo.com", "files");
+        status("https://www.teunjojo.com", "www");
+        status("https://files.teunjojo.com", "files");
         $.getJSON('https://api.minetools.eu/ping/teunjojo.com/25565', function (data) {
             if (data.error) {
                 $('#mcServer :nth-child(2)').removeClass("neutral");
