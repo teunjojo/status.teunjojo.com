@@ -162,6 +162,7 @@
                 </li>
                 <li id="www"><span class="online"></span><span class="offline neutral"></span> www.teunjojo.com</li>
                 <li id="files"><span class="online"></span><span class="offline neutral"></span> files.teunjojo.com</li>
+                <li id="recipe"><span class="online"></span><span class="offline neutral"></span> recipe.teunjojo.com</li>
                 <li id="mcServer"><span class="online"></span><span class="offline neutral"></span> Minecraft Server
                 </li>
             </ul>
@@ -184,6 +185,7 @@
         }
         status("https://www.teunjojo.com", "www");
         status("https://files.teunjojo.com", "files");
+        status("https://recipe.teunjojo.com", "recipe");
         $.getJSON('https://api.minetools.eu/ping/teunjojo.com/25565', function (data) {
             if (data.error) {
                 $('#mcServer :nth-child(2)').removeClass("neutral");
