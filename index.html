@@ -151,49 +151,51 @@
 </head>
 
 <body>
-    <div class="metal">
-        <div class="container">
-            <h1>teunjojo System Status</h1>
-            <ul>
-                <li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
-                    <span style="opacity:0">state</span>
-                </li>
-                <li id="status"><span class="online"></span><span class="offline neutral"></span> status.teunjojo.com
-                </li>
-                <li id="www"><span class="online"></span><span class="offline neutral"></span> www.teunjojo.com</li>
-                <li id="files"><span class="online"></span><span class="offline neutral"></span> files.teunjojo.com</li>
-                <li id="recipe"><span class="online"></span><span class="offline neutral"></span> recipe.teunjojo.com</li>
-                <li id="mcServer"><span class="online"></span><span class="offline neutral"></span> Minecraft Server
-                </li>
-            </ul>
-        </div>
-
-    </div>
-    <script>
+<div class="metal">
+<div class="container">
+<h1>teunjojo System Status</h1>
+<ul>
+<li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
+<span style="opacity:0">state</span>
+</li>
+<li id="status"><span class="online neutral"></span><span class="offline neutral"></span> status.teunjojo.com
+</li>
+<li id="www"><span class="online neutral"></span><span class="offline neutral"></span> www.teunjojo.com</li>
+<li id="files"><span class="online neutral"></span><span class="offline neutral"></span> files.teunjojo.com</li>
+<li id="recipe"><span class="online neutral"></span><span class="offline neutral"></span> recipe.teunjojo.com</li>
+<li id="mcServer"><span class="online neutral"></span><span class="offline neutral"></span> Minecraft Server
+</li>
+</ul>
+</div>
+</div>
+<script type="text/javascript">
         async function status(ip, id) {
             try {
                 const response = await fetch(ip);
                 if (response.status != 200) {
                     $('#' + id + ' :nth-child(2)').removeClass("neutral");
-                    $('#' + id + ' :nth-child(1)').addClass("neutral");
-                }
+                } else {
+					$('#' + id + ' :nth-child(1)').removeClass("neutral");
+				}
 
             } catch (err) {
-                $('#' + id + ' :nth-child(2)').removeClass("neutral");
-                $('#' + id + ' :nth-child(1)').addClass("neutral");
-            }
+                    $('#' + id + ' :nth-child(2)').removeClass("neutral");
+                }
         }
+		status("https://status.teunjojo.com", "status");
         status("https://www.teunjojo.com", "www");
         status("https://files.teunjojo.com", "files");
         status("https://recipe.teunjojo.com", "recipe");
         $.getJSON('https://api.minetools.eu/ping/teunjojo.com/25565', function (data) {
             if (data.error) {
                 $('#mcServer :nth-child(2)').removeClass("neutral");
-                $('#mcServer :nth-child(1)').addClass("neutral");
-            }
+            } else {
+					$('#mcServer :nth-child(1)').removeClass("neutral");
+				}
         });
 
     </script>
+
 </body>
 
 </html>
