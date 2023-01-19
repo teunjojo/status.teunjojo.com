@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -41,18 +42,19 @@
         }
 
         .metal {
-            color: hsl(0, 0%, 50%);
-            text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
             height: 100vh;
             width: 100vw;
             background: linear-gradient(74deg, hsl(0, 0%, 60%) 13%, hsl(0, 0%, 80%) 24%, 37%, hsl(0, 0%, 70%) 47%, hsl(0, 0%, 60%) 62%, hsl(0, 0%, 80%) 79%, hsl(0, 0%, 40%) 100%);
             -webkit-box-sizing: border-box;
-
             box-sizing: border-box;
             border: 1px solid #000000;
             -webkit-box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
             box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
+        }
 
+        span, a, body {
+            color: hsl(0, 0%, 50%);
+            text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
         }
 
         .container {
@@ -82,7 +84,6 @@
         li {
 
             border-bottom: solid 1px rgba(0, 0, 0, .25);
-
             list-style-type: none;
             padding: 5px;
             word-wrap: break-word;
@@ -106,7 +107,6 @@
                 hsla(0, 0%, 100%, .5) 0 2px 3px 2px;
             /* outer HL */
         }
-
 
         .neutral.online {
             background-color: #2d8016;
@@ -139,7 +139,6 @@
 
 
         .label {
-
             float: right;
             margin-left: 10px;
             padding: 2px 5px;
@@ -151,38 +150,46 @@
 </head>
 
 <body>
-<div class="metal">
-<div class="container">
-<h1>teunjojo System Status</h1>
-<ul>
-<li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
-<span style="opacity:0">state</span>
-</li>
-<li id="status"><span class="online neutral"></span><span class="offline neutral"></span> status.teunjojo.com
-</li>
-<li id="www"><span class="online neutral"></span><span class="offline neutral"></span> www.teunjojo.com</li>
-<li id="files"><span class="online neutral"></span><span class="offline neutral"></span> files.teunjojo.com</li>
-<li id="recipe"><span class="online neutral"></span><span class="offline neutral"></span> recipe.teunjojo.com</li>
-<li id="mcServer"><span class="online neutral"></span><span class="offline neutral"></span> Minecraft Server
-</li>
-</ul>
-</div>
-</div>
-<script type="text/javascript">
+    <div class="metal">
+        <div class="container">
+            <h1>teunjojo System Status</h1>
+            <ul>
+                <li style="border-top: none;"><span class="label">on</span><span class="label">off</span>
+                    <span style="opacity:0">Service</span>
+                </li>
+                <li id="status"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <a href="https://status.teunjojo.com">status.teunjojo.com</a>
+                </li>
+                <li id="www"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <a href="https://www.teunjojo.com">www.teunjojo.com</a>
+                </li>
+                <li id="files"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <a href="https://files.teunjojo.com">files.teunjojo.com</a>
+                </li>
+                <li id="recipe"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <a href="https://recipe.teunjojo.com">recipe.teunjojo.com</a>
+                </li>
+                <li id="mcServer"><span class="online neutral"></span><span class="offline neutral"></span> Minecraft
+                    Server
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
         async function status(ip, id) {
             try {
                 const response = await fetch(ip);
                 if (response.status != 200) {
                     $('#' + id + ' :nth-child(2)').removeClass("neutral");
                 } else {
-					$('#' + id + ' :nth-child(1)').removeClass("neutral");
-				}
+                    $('#' + id + ' :nth-child(1)').removeClass("neutral");
+                }
 
             } catch (err) {
-                    $('#' + id + ' :nth-child(2)').removeClass("neutral");
-                }
+                $('#' + id + ' :nth-child(2)').removeClass("neutral");
+            }
         }
-		status("https://status.teunjojo.com", "status");
+        status("https://status.teunjojo.com", "status");
         status("https://www.teunjojo.com", "www");
         status("https://files.teunjojo.com", "files");
         status("https://recipe.teunjojo.com", "recipe");
@@ -190,8 +197,8 @@
             if (data.error) {
                 $('#mcServer :nth-child(2)').removeClass("neutral");
             } else {
-					$('#mcServer :nth-child(1)').removeClass("neutral");
-				}
+                $('#mcServer :nth-child(1)').removeClass("neutral");
+            }
         });
 
     </script>
