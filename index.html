@@ -166,6 +166,9 @@
                 <li id="files"><span class="online neutral"></span><span class="offline neutral"></span>
                     <a href="https://files.teunjojo.com">files.teunjojo.com</a>
                 </li>
+                <li id="media"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <a href="https://media.teunjojo.com">media.teunjojo.com</a>
+                </li>
                 <li id="recipe"><span class="online neutral"></span><span class="offline neutral"></span>
                     <a href="https://recipe.teunjojo.com">recipe.teunjojo.com</a>
                 </li>
@@ -192,6 +195,7 @@
         status("https://status.teunjojo.com", "status");
         status("https://www.teunjojo.com", "www");
         status("https://files.teunjojo.com", "files");
+        status("https://media.teunjojo.com", "media");
         status("https://recipe.teunjojo.com", "recipe");
         $.getJSON('https://api.minetools.eu/ping/mc.teunjojo.com/25565', function (data) {
             if (data.error) {
