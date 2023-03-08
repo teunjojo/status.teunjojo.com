@@ -12,7 +12,7 @@
         crossorigin="anonymous"></script>
     <title>teunjojo System Status</title>
     <style media="screen">
-        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=VT323');
 
         :root {
             --black: #271300;
@@ -32,39 +32,47 @@
 
         html,
         body {
-            font-family: 'Ubuntu';
+            font-family: 'arial';
             margin: 0;
             padding: 0;
-
-            background-color: hsla(0, 0%, 90%, 1);
-            background-image: linear-gradient(-45deg, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, .05));
-            background-size: 5px;
+            color: rgb(200, 200, 200);
         }
 
         .metal {
             height: 100vh;
             width: 100vw;
-            background: linear-gradient(74deg, hsl(0, 0%, 60%) 13%, hsl(0, 0%, 80%) 24%, 37%, hsl(0, 0%, 70%) 47%, hsl(0, 0%, 60%) 62%, hsl(0, 0%, 80%) 79%, hsl(0, 0%, 40%) 100%);
+            background: linear-gradient(0, rgb(16, 16, 16) 0%, rgb(64, 64, 64) 100%);
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             border: 1px solid #000000;
-            -webkit-box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
-            box-shadow: inset 3px 2px 3px rgba(255, 255, 255, 0.4), inset -2px -2px 2px rgba(0, 0, 0, 0.4);
+
+            background-image: radial-gradient(rgb(0, 0, 0) 40%, transparent 40%), radial-gradient(rgb(0, 0, 0) 40%, transparent 40%);
+            background-color: rgb(16, 16, 16);
+            background-position: 0 0, 25px 25px;
+            background-size: 50px 50px;
+            box-shadow: inset 10px 10px 0 rgb(32, 32, 32), inset -10px -10px 0 rgb(32, 32, 32);
         }
 
-        span, a, body {
-            color: hsl(0, 0%, 50%);
-            text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
+        .display {
+            font-family: "VT323";
+            display: inline-block;
+            color: rgb(128, 192, 0);
+            background: linear-gradient(0, rgb(0, 0, 0) 0%, rgb(32, 48, 0) 100%);
+            padding: 4px;
+            border-radius: 3px;
+            border: solid 2px black;
+            width: 200px;
         }
 
         .container {
-
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 16px;
             width: 90%;
+            background: linear-gradient(0, rgb(16, 16, 16) 0%, rgb(32, 32, 32) 100%);
+            border: solid 10px rgb(16, 16, 16);
+            box-shadow: inset 10px 10px 0 rgb(0, 0, 0), inset -10px -10px 0 rgb(0, 0, 0);
         }
 
         h1 {
@@ -97,7 +105,7 @@
             float: right;
             width: 12px;
             height: 12px;
-            margin: 4px;
+            margin: 8px;
             margin-left: 22px;
             margin-right: 7px;
             border-radius: 50%;
@@ -146,7 +154,6 @@
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="30">
 </head>
 
 <body>
@@ -158,22 +165,22 @@
                     <span style="opacity:0">Service</span>
                 </li>
                 <li id="status"><span class="online neutral"></span><span class="offline neutral"></span>
-                    <a href="https://status.teunjojo.com">status.teunjojo.com</a>
+                    <a href="https://status.teunjojo.com" class="display">status.teunjojo.com</a>
                 </li>
                 <li id="www"><span class="online neutral"></span><span class="offline neutral"></span>
-                    <a href="https://www.teunjojo.com">www.teunjojo.com</a>
+                    <a href="https://www.teunjojo.com" class="display">www.teunjojo.com</a>
                 </li>
                 <li id="files"><span class="online neutral"></span><span class="offline neutral"></span>
-                    <a href="https://files.teunjojo.com">files.teunjojo.com</a>
+                    <a href="https://files.teunjojo.com" class="display">files.teunjojo.com</a>
                 </li>
                 <li id="media"><span class="online neutral"></span><span class="offline neutral"></span>
-                    <a href="https://media.teunjojo.com">media.teunjojo.com</a>
+                    <a href="https://media.teunjojo.com" class="display">media.teunjojo.com</a>
                 </li>
                 <li id="recipe"><span class="online neutral"></span><span class="offline neutral"></span>
-                    <a href="https://recipe.teunjojo.com">recipe.teunjojo.com</a>
+                    <a href="https://recipe.teunjojo.com" class="display">recipe.teunjojo.com</a>
                 </li>
-                <li id="mcServer"><span class="online neutral"></span><span class="offline neutral"></span> Minecraft
-                    Server
+                <li id="mcServer"><span class="online neutral"></span><span class="offline neutral"></span>
+                    <span class="display">Minecraft Server</span>
                 </li>
             </ul>
         </div>
@@ -184,26 +191,31 @@
                 const response = await fetch(ip);
                 if (response.status != 200) {
                     $('#' + id + ' :nth-child(2)').removeClass("neutral");
+                    $('#' + id + ' :nth-child(1)').addClass("neutral");
                 } else {
                     $('#' + id + ' :nth-child(1)').removeClass("neutral");
+                    $('#' + id + ' :nth-child(2)').addClass("neutral");
                 }
 
             } catch (err) {
                 $('#' + id + ' :nth-child(2)').removeClass("neutral");
+                $('#' + id + ' :nth-child(1)').addClass("neutral");
             }
         }
-        status("https://status.teunjojo.com", "status");
-        status("https://www.teunjojo.com", "www");
-        status("https://files.teunjojo.com", "files");
-        status("https://media.teunjojo.com/web/index.html", "media");
-        status("https://recipe.teunjojo.com", "recipe");
-        $.getJSON('https://api.minetools.eu/ping/mc.teunjojo.com/25565', function (data) {
-            if (data.error) {
-                $('#mcServer :nth-child(2)').removeClass("neutral");
-            } else {
-                $('#mcServer :nth-child(1)').removeClass("neutral");
-            }
-        });
+        setInterval(() => {
+            status("https://status.teunjojo.com", "status");
+            status("https://www.teunjojo.com", "www");
+            status("https://files.teunjojo.com", "files");
+            status("https://media.teunjojo.com/web/index.html", "media");
+            status("https://recipe.teunjojo.com", "recipe");
+            $.getJSON('https://api.minetools.eu/ping/mc.teunjojo.com/25565', function (data) {
+                if (data.error) {
+                    $('#mcServer :nth-child(2)').removeClass("neutral");
+                } else {
+                    $('#mcServer :nth-child(1)').removeClass("neutral");
+                }
+            });
+        }, 1000);
 
     </script>
 
